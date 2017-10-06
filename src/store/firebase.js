@@ -32,7 +32,7 @@ export function updateRefs(uid) {
   subjectsRef = db.ref(uid + "/subjects");
 
   tasksRef = db.ref(uid + "/tasks");
-  sortedFilteredTasksRef = tasksRef.orderByChild("due");//.startAt(getCurrentDate());
+  sortedFilteredTasksRef = tasksRef.orderByChild("due").startAt(getCurrentDate());
 
   timetableRef = db.ref(uid + "/timetable");
 
