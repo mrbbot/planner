@@ -30,8 +30,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,600i');
-
 @import "~bulma/sass/utilities/initial-variables";
 
 $primary: $grey-darker;
