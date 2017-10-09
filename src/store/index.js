@@ -42,6 +42,15 @@ export const store = new Vuex.Store({
       let tasks = state.tasks.slice();
 
       tasks.sort((a, b) => {
+        let aDate = new Date(a.due);
+        let bDate = new Date(b.due);
+
+        if(aDate < bDate) {
+          return -1;
+        } else if(aDate > bDate) {
+          return 1;
+        }
+
         if(a.due === b.due) {
           if(a.completed === '') {
             return -1;
@@ -58,6 +67,7 @@ export const store = new Vuex.Store({
       for(let i = 0; i < tasks.length; i++) {
         if(lastDate !== tasks[i].due) {
           lastDate = tasks[i].due;
+          console.log(lastDate);
           results.push({
             title: lastDate,
             arr: []
