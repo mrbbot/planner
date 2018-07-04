@@ -11,10 +11,9 @@
 </template>
 
 <script>
-
 export default {
   props: {
-    'value': {
+    value: {
       type: String,
       required: true
     }
@@ -42,46 +41,46 @@ export default {
         "#9E9E9E",
         "#607D8B"
       ]
-    }
+    };
   },
   methods: {
     selectColour(colour) {
-      this.$emit('input', colour)
+      this.$emit("input", colour);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-  .colour-input .control {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 32px);
-    grid-gap: 10px;
+.colour-input .control {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 32px);
+  grid-gap: 10px;
 
-    i {
-      display: none;
+  i {
+    display: none;
+  }
+
+  .colour-ball {
+    border: 5px solid transparent;
+    transition: border-color 0.1s ease-in;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      border-color: rgba(0, 0, 0, 0.1);
     }
 
-    .colour-ball {
-      border: 5px solid transparent;
-      transition: border-color 0.1s ease-in;
+    &.active {
+      border-color: rgba(0, 0, 0, 0.2);
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &:hover {
-        border-color: rgba(0, 0, 0, 0.1);
-      }
-
-      &.active {
-        border-color: rgba(0, 0, 0, 0.2);
-        
-        i {
-          display: block;
-          color: rgba(0, 0, 0, 0.2);
-        }
+      i {
+        display: block;
+        color: rgba(0, 0, 0, 0.2);
       }
     }
   }
+}
 </style>

@@ -35,29 +35,29 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import * as firebase from 'firebase';
-import { auth } from '../store/firebase';
+import { mapState } from "vuex";
+import * as firebase from "firebase";
+import { auth } from "../store/firebase";
 
 export default {
   data() {
     return {
       menuActive: false
-    }
+    };
   },
   computed: {
-    ...mapState(['currentUser'])
+    ...mapState(["currentUser"])
   },
   methods: {
     signIn() {
-      let provider = new firebase.auth.GoogleAuthProvider();
+      const provider = new firebase.auth.GoogleAuthProvider();
       auth.signInWithPopup(provider);
     },
     signOut() {
       auth.signOut();
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

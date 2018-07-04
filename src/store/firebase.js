@@ -1,7 +1,11 @@
-import { initializeApp } from 'firebase';
-import { getCurrentDate } from '../utils/dateutils';
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
 
-export const firebase = initializeApp({
+import { getCurrentDate } from "../utils/dateutils";
+
+// noinspection SpellCheckingInspection
+export const app = firebase.initializeApp({
   apiKey: "AIzaSyBO2G2DexU8iYkH76363_5-hOLPh4xtbpQ",
   authDomain: "mrbbot-planner.firebaseapp.com",
   databaseURL: "https://mrbbot-planner.firebaseio.com",
@@ -10,10 +14,8 @@ export const firebase = initializeApp({
   messagingSenderId: "315493357478"
 });
 
-export const db = firebase.database();
-export const auth = firebase.auth();
-
-const user = "mrbbot";
+export const db = app.database();
+export const auth = app.auth();
 
 export let slotsRef;
 export let sortedSlotsRef;
@@ -32,7 +34,9 @@ export function updateRefs(uid) {
   subjectsRef = db.ref(uid + "/subjects");
 
   tasksRef = db.ref(uid + "/tasks");
-  sortedFilteredTasksRef = tasksRef.orderByChild("due").startAt(getCurrentDate());
+  sortedFilteredTasksRef = tasksRef
+    .orderByChild("due")
+    .startAt(getCurrentDate());
 
   timetableRef = db.ref(uid + "/timetable");
 
@@ -41,5 +45,5 @@ export function updateRefs(uid) {
     subjects: subjectsRef,
     tasks: sortedFilteredTasksRef,
     timetable: timetableRef
-  }
+  };
 }

@@ -1,3 +1,4 @@
+<!--suppress HtmlFormInputWithoutLabel -->
 <template>
   <div class="subjects">
     <div v-for="key in subjectKeys" v-bind:key="key" class="box subject">
@@ -55,9 +56,12 @@
               </p>
             </div>
 
+            <!--suppress RequiredAttributes -->
             <colour-input v-model="modalSubject.colour"></colour-input>
 
+            <!--suppress RequiredAttributes -->
             <multi-input item="Teacher" v-model="modalSubject.teachers"></multi-input>
+            <!--suppress RequiredAttributes -->
             <multi-input item="Room" v-model="modalSubject.rooms"></multi-input>
           </template>
           <p v-else>
@@ -77,34 +81,34 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
-import { subjectsRef } from '../store/firebase';
+import { mapGetters } from "vuex";
+import { subjectsRef } from "../store/firebase";
 
 export default {
-  name: 'Subjects',
+  name: "Subjects",
   data() {
     return {
       modalSubject: {
         delete: false,
         new: false,
-        name: '',
-        colour: '#9E9E9E',
+        name: "",
+        colour: "#9E9E9E",
         teachers: [],
         rooms: []
       },
       modalVisible: false
-    }
+    };
   },
   computed: {
-    ...mapGetters(['subjects', 'subjectKeys'])
+    ...mapGetters(["subjects", "subjectKeys"])
   },
   methods: {
     showAddSubject() {
       this.modalSubject = {
         delete: false,
         new: true,
-        name: '',
-        colour: '#9E9E9E',
+        name: "",
+        colour: "#9E9E9E",
         teachers: [],
         rooms: []
       };
@@ -112,13 +116,13 @@ export default {
       this.modalVisible = true;
     },
     showEditSubject(key) {
-      let subject = this.subjects[key];
+      const subject = this.subjects[key];
 
       this.modalSubject = {
         delete: false,
         new: false,
         name: key,
-        colour: subject.colour || '#9E9E9E',
+        colour: subject.colour || "#9E9E9E",
         teachers: subject.teachers ? subject.teachers.slice() : [],
         rooms: subject.rooms ? subject.rooms.slice() : []
       };
@@ -126,7 +130,7 @@ export default {
       this.modalVisible = true;
     },
     updateSubject() {
-      let toUpdate = {};
+      const toUpdate = {};
       toUpdate[this.modalSubject.name] = {
         colour: this.modalSubject.colour,
         rooms: this.modalSubject.rooms,
@@ -150,7 +154,7 @@ export default {
       this.modalVisible = false;
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

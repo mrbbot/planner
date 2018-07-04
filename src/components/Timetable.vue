@@ -47,12 +47,10 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
-import { timetableRef, slotsRef } from '../store/firebase';
-import { shortDayNames } from '../utils/dateutils';
+import { mapState, mapGetters } from "vuex";
 
 export default {
-  name: 'timetableComponent',
+  name: "timetableComponent",
   props: {
     editing: {
       type: Boolean,
@@ -60,20 +58,18 @@ export default {
     }
   },
   data() {
-    return {
-
-    }
+    return {};
   },
   computed: {
-    ...mapState(['slots']),
-    ...mapGetters(['subjects', 'timetableDays', 'subjectKeys'])
+    ...mapState(["slots"]),
+    ...mapGetters(["subjects", "timetableDays", "subjectKeys"])
   },
   methods: {
     showEditLesson(day, lesson) {
       this.$emit("showEditLesson", day, lesson);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -100,7 +96,7 @@ export default {
     .buttons {
       position: absolute;
       top: 8px;
-      right: 0px;
+      right: 0;
       padding: 4px;
 
       background-color: white;
@@ -127,7 +123,7 @@ export default {
   }
 }
 
-@media(min-width: 1408px) {
+@media (min-width: 1408px) {
   .timetable {
     grid-template-columns: repeat(5, 1fr);
 

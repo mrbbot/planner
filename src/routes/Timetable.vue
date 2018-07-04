@@ -1,3 +1,4 @@
+<!--suppress HtmlFormInputWithoutLabel -->
 <template>
 <div class="timetable-wrapper">
   <app-timetable :editing="editing" @showEditLesson="showEditLesson"></app-timetable>
@@ -46,9 +47,9 @@
           <label class="label">Teacher</label>
           <div class="control">
             <div class="select" :class="{'is-danger': !isValidTeacher}">
-              <select v-model="lessonModal.teacher" :disabled="avaliableTeachers.length == 0">
+              <select v-model="lessonModal.teacher" :disabled="availableTeachers.length === 0">
                 <option></option>
-                <option v-for="teacher in avaliableTeachers" :key="teacher">{{teacher}}</option>
+                <option v-for="teacher in availableTeachers" :key="teacher">{{teacher}}</option>
               </select>
             </div>
           </div>
@@ -61,9 +62,9 @@
           <label class="label">Room</label>
           <div class="control">
             <div class="select" :class="{'is-danger': !isValidRoom}">
-              <select v-model="lessonModal.room" :disabled="avaliableRooms.length == 0">
+              <select v-model="lessonModal.room" :disabled="availableRooms.length === 0">
                 <option></option>
-                <option v-for="room in avaliableRooms" :key="room">{{room}}</option>
+                <option v-for="room in availableRooms" :key="room">{{room}}</option>
               </select>
             </div>
           </div>
@@ -150,16 +151,15 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
-import { timetableRef, slotsRef } from '../store/firebase';
-import { shortDayNames } from '../utils/dateutils';
+import { mapState, mapGetters } from "vuex";
+import { timetableRef, slotsRef } from "../store/firebase";
 
-import Timetable from '../components/Timetable.vue';
+import Timetable from "../components/Timetable.vue";
 
 export default {
-  name: 'timetable',
+  name: "timetable",
   components: {
-    'app-timetable': Timetable 
+    "app-timetable": Timetable
   },
   data() {
     return {
@@ -181,58 +181,48 @@ export default {
         end: ""
       },
       slotModalVisible: false
-    }
+    };
   },
   computed: {
-    ...mapState(['slots']),
-    ...mapGetters(['subjects', 'timetableDays', 'subjectKeys']),
+    ...mapState(["slots"]),
+    ...mapGetters(["subjects", "timetableDays", "subjectKeys"]),
 
-    avaliableTeachers() {
-      if(this.lessonModal.subject === 'Free')
-        return [];
-      else
-        return this.subjects[this.lessonModal.subject].teachers.slice();
+    availableTeachers() {
+      if (this.lessonModal.subject === "Free") return [];
+      else return this.subjects[this.lessonModal.subject].teachers.slice();
     },
-    avaliableRooms() {
-      if(this.lessonModal.subject === 'Free')
-        return [];
-      else
-        return this.subjects[this.lessonModal.subject].rooms.slice();
+    availableRooms() {
+      if (this.lessonModal.subject === "Free") return [];
+      else return this.subjects[this.lessonModal.subject].rooms.slice();
     },
 
     isValidTeacher() {
-      if(this.lessonModal.subject === 'Free')
-        return true;
-      else if(this.lessonModal.teacher !== '')
-        return true;
-      else
-        return false;
+      if (this.lessonModal.subject === "Free") return true;
+      else return this.lessonModal.teacher !== "";
     },
     isValidRoom() {
-      if(this.lessonModal.subject === 'Free')
-        return true;
-      else if(this.lessonModal.room !== '')
-        return true;
-      else
-        return false;
+      if (this.lessonModal.subject === "Free") return true;
+      else return this.lessonModal.room !== "";
     },
     isValidLesson() {
       return this.isValidTeacher && this.isValidRoom;
     },
 
     slotExists() {
-      for(let i = 0; i < this.slots.length; i++) {
-        if(this.slots[i].name === this.slotModal.slot) {
+      for (let i = 0; i < this.slots.length; i++) {
+        if (this.slots[i].name === this.slotModal.slot) {
           return true;
         }
       }
       return false;
     },
     isValidSlot() {
-      return this.slotModal.name !== ''
-        && this.slotModal.start !== ''
-        && this.slotModal.end !== ''
-        && !this.slotExists;
+      return (
+        this.slotModal.name !== "" &&
+        this.slotModal.start !== "" &&
+        this.slotModal.end !== "" &&
+        !this.slotExists
+      );
     }
   },
   methods: {
@@ -242,24 +232,26 @@ export default {
     },
     showEditLesson(day, lesson) {
       this.lessonModal = {
-        day:      day.name,
-        slot:     lesson.slot.name,
-        subject:  lesson.subject,
-        teacher:  lesson.teacher || "",
-        room:     lesson.room || ""
+        day: day.name,
+        slot: lesson.slot.name,
+        subject: lesson.subject,
+        teacher: lesson.teacher || "",
+        room: lesson.room || ""
       };
 
       this.lessonModalVisible = true;
     },
     editLesson() {
-      let ref = timetableRef.child(this.lessonModal.day).child(this.lessonModal.slot);
-      if(this.lessonModal.subject === 'Free') {
+      const ref = timetableRef
+        .child(this.lessonModal.day)
+        .child(this.lessonModal.slot);
+      if (this.lessonModal.subject === "Free") {
         ref.remove();
       } else {
         ref.update({
-          subject:  this.lessonModal.subject,
-          teacher:  this.lessonModal.teacher,
-          room:     this.lessonModal.room
+          subject: this.lessonModal.subject,
+          teacher: this.lessonModal.teacher,
+          room: this.lessonModal.room
         });
       }
 
@@ -297,9 +289,8 @@ export default {
       this.slotModalVisible = false;
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-
 </style>

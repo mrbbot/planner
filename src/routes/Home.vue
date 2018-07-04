@@ -15,24 +15,24 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
-import { tasksRef } from '../store/firebase';
-import { formatDate, getCurrentDate } from '../utils/dateutils';
+import { mapState, mapGetters } from "vuex";
+import { tasksRef } from "../store/firebase";
+import { formatDate, getCurrentDate } from "../utils/dateutils";
 
-import TaskGroup from '../components/TaskGroup.vue';
-import TaskProgress from '../components/TaskProgress.vue';
-import Timetable from '../components/Timetable.vue';
+import TaskGroup from "../components/TaskGroup.vue";
+import TaskProgress from "../components/TaskProgress.vue";
+import Timetable from "../components/Timetable.vue";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
-    'app-task-group': TaskGroup,
-    'app-task-progress': TaskProgress,
-    'app-timetable': Timetable
+    "app-task-group": TaskGroup,
+    "app-task-progress": TaskProgress,
+    "app-timetable": Timetable
   },
   computed: {
-    ...mapState(['slots']),
-    ...mapGetters(['priorities', 'subjects', 'timetableDays'])
+    ...mapState(["slots"]),
+    ...mapGetters(["priorities", "subjects", "timetableDays"])
   },
   methods: {
     formatDate,
@@ -41,9 +41,8 @@ export default {
     },
 
     getCompleteValue(currentValue) {
-      if(currentValue !== '')
-        return '';
-      
+      if (currentValue !== "") return "";
+
       return getCurrentDate();
     },
     toggleComplete(task) {
@@ -55,10 +54,11 @@ export default {
         completed: this.getCompleteValue(task.completed)
       });
 
+      // noinspection JSUnusedGlobalSymbols
       this.modalVisible = false;
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

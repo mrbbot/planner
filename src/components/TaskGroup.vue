@@ -60,33 +60,31 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
-import { tasksRef } from '../store/firebase';
-import { formatDate, getCurrentDate } from '../utils/dateutils';
+import { mapGetters } from "vuex";
+import { tasksRef } from "../store/firebase";
+import { formatDate, getCurrentDate } from "../utils/dateutils";
 
 export default {
-  name: 'taskGroup',
+  name: "taskGroup",
   props: {
-    'tasks': {
+    tasks: {
       type: Array,
       required: true
     },
-    'title': {
+    title: {
       type: String,
       required: true
     },
-    'editable': {
+    editable: {
       type: Boolean,
       default: true
     }
   },
   data() {
-    return {
-      
-    }
+    return {};
   },
   computed: {
-    ...mapGetters(['subjects', 'groupedTasks', 'subjectKeys'])
+    ...mapGetters(["subjects", "groupedTasks", "subjectKeys"])
   },
   methods: {
     formatDate,
@@ -95,9 +93,8 @@ export default {
     },
 
     getCompleteValue(currentValue) {
-      if(currentValue !== '')
-        return '';
-      
+      if (currentValue !== "") return "";
+
       return getCurrentDate();
     },
     toggleComplete(task) {
@@ -109,6 +106,7 @@ export default {
         completed: this.getCompleteValue(task.completed)
       });
 
+      // noinspection JSUnusedGlobalSymbols
       this.modalVisible = false;
     },
 
@@ -119,7 +117,7 @@ export default {
       this.$emit("showDeleteTask", task);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

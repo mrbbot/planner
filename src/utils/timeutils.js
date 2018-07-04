@@ -1,14 +1,14 @@
 export function mins(time) {
-  let timeParts = time.split(":");
-  if(timeParts.length < 2)
-    return 0;
+  const timeParts = time.split(":");
+  if (timeParts.length < 2) return 0;
 
-  let hours = parseInt(timeParts[0]);
-  let minutes = parseInt(timeParts[1]);
+  const hours = parseInt(timeParts[0]);
+  const minutes = parseInt(timeParts[1]);
 
-  return (hours * 60) + minutes;
+  return hours * 60 + minutes;
 }
 
+// noinspection JSUnusedGlobalSymbols
 export function percent(v, max) {
   return (v / max) * 100;
 }

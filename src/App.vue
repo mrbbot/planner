@@ -12,21 +12,21 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
-import Header from './components/Header.vue';
-import Loader from './components/Loader.vue';
+import Header from "./components/Header.vue";
+import Loader from "./components/Loader.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    'app-header': Header,
-    'app-loader': Loader
+    "app-header": Header,
+    "app-loader": Loader
   },
   computed: {
-    ...mapState(['loaded', 'currentUser'])
+    ...mapState(["loaded", "currentUser"])
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -64,7 +64,7 @@ section.container {
   .icon-container {
     width: 26px;
     height: 26px;
-    padding: 0px;
+    padding: 0;
     text-align: left;
     line-height: 26px;
 
@@ -98,10 +98,10 @@ section.container {
 }
 
 .is-warning-color {
-  color: #FFC107;
+  color: #ffc107;
 
   strong {
-    color: #FFC107;
+    color: #ffc107;
   }
 }
 
@@ -132,7 +132,7 @@ section.container {
     position: relative;
 
     padding: 8px 0;
-    border-bottom: 1px solid #BBBBBB;
+    border-bottom: 1px solid #bbbbbb;
 
     &:last-child {
       border-bottom: none;
@@ -150,7 +150,8 @@ section.container {
   }
 }
 
-.select, .select select {
+.select,
+.select select {
   width: 100%;
 }
 </style>

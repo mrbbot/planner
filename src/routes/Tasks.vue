@@ -1,3 +1,4 @@
+<!--suppress HtmlFormInputWithoutLabel -->
 <template>
 <div class="tasks-wrapper">
   <button @click="showAddTask" class="button is-info">Add Task</button>
@@ -46,6 +47,7 @@
                 <select v-model="modalTask.subject">
                   <option></option>
                   <option v-for="subject in subjectKeys" :key="subject" :style="{color: subjects[subject].colour}">
+                    <!--suppress HtmlUnknownTag -->
                     <div class="colour-ball" ></div>
                     {{subject}}
                   </option>
@@ -85,41 +87,43 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
-import { tasksRef } from '../store/firebase';
-import { formatDate, getCurrentDate } from '../utils/dateutils';
+import { mapGetters } from "vuex";
+import { tasksRef } from "../store/firebase";
+import { formatDate, getCurrentDate } from "../utils/dateutils";
 
-import TaskGroup from '../components/TaskGroup.vue';
-import TaskProgress from '../components/TaskProgress.vue';
+import TaskGroup from "../components/TaskGroup.vue";
+import TaskProgress from "../components/TaskProgress.vue";
 
 export default {
-  name: 'tasks',
+  name: "tasks",
   components: {
-    'app-task-group': TaskGroup,
-    'app-task-progress': TaskProgress
+    "app-task-group": TaskGroup,
+    "app-task-progress": TaskProgress
   },
   data() {
     return {
       modalTask: {
         delete: false,
         new: false,
-        ".key": '',
-        name: '',
-        notes: '',
-        subject: '',
-        due: '',
-        completed: ''
+        ".key": "",
+        name: "",
+        notes: "",
+        subject: "",
+        due: "",
+        completed: ""
       },
       modalVisible: false
-    }
+    };
   },
   computed: {
     //...mapState(['tasks']),
-    ...mapGetters(['subjects', 'groupedTasks', 'subjectKeys']),
+    ...mapGetters(["subjects", "groupedTasks", "subjectKeys"]),
     isValidTask() {
-      return this.modalTask.name !== ''
-        && this.modalTask.subject !== ''
-        && this.modalTask.due !== '';
+      return (
+        this.modalTask.name !== "" &&
+        this.modalTask.subject !== "" &&
+        this.modalTask.due !== ""
+      );
     }
   },
   methods: {
@@ -129,9 +133,8 @@ export default {
     },
 
     getCompleteValue(currentValue) {
-      if(currentValue !== '')
-        return '';
-      
+      if (currentValue !== "") return "";
+
       return getCurrentDate();
     },
     toggleComplete(task) {
@@ -150,12 +153,12 @@ export default {
       this.modalTask = {
         delete: false,
         new: true,
-        ".key": '',
-        name: '',
-        notes: '',
-        subject: '',
-        due: '',
-        completed: ''
+        ".key": "",
+        name: "",
+        notes: "",
+        subject: "",
+        due: "",
+        completed: ""
       };
 
       this.modalVisible = true;
@@ -183,7 +186,7 @@ export default {
         due: task.due,
         completed: task.completed
       };
-      
+
       this.modalVisible = true;
     },
     updateTask() {
@@ -197,7 +200,7 @@ export default {
 
       this.modalVisible = false;
     },
-    
+
     showDeleteTask(task) {
       this.modalTask.delete = true;
       this.modalTask[".key"] = task[".key"];
@@ -211,7 +214,7 @@ export default {
       this.modalVisible = false;
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
