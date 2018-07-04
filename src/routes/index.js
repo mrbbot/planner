@@ -13,7 +13,8 @@ const routes = [
   { path: "/", component: Home },
   { path: "/tasks", component: Tasks },
   { path: "/timetable", component: Timetable },
-  { path: "/subjects", component: Subjects }
+  { path: "/subjects", component: Subjects },
+  { path: "*", redirect: "/" }
 ];
 
 export const router = new VueRouter({
