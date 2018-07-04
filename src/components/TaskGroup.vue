@@ -48,13 +48,11 @@
         </div>
       </template>
     </div>
-
-    <button @click="toggleComplete(task)" class="button is-small is-outlined" :class="{'is-success': !task.completed, 'is-danger': task.completed}">{{!task.completed ? 'Complete' : 'Not Yet Complete'}}</button>
-    <template v-if="editable">
-      <button @click="showEditTask(task)" class="button is-outlined is-small">Edit</button>
-  
-      <button @click="showDeleteTask(task)" class="delete" aria-label="close"></button>
-    </template>
+    <div class="line-button-group">
+      <button @click="toggleComplete(task)" class="button is-small is-outlined" :class="{'is-success': !task.completed, 'is-danger': task.completed}">{{!task.completed ? 'Complete' : 'Not Yet Complete'}}</button>
+      <button v-if="editable" @click="showEditTask(task)" class="button is-outlined is-small">Edit</button>
+    </div>
+    <button v-if="editable" @click="showDeleteTask(task)" class="delete" aria-label="close"></button>
   </div>
 </div>
 </template>
@@ -132,6 +130,12 @@ export default {
 
   .list-group-item {
     padding: 8px 0 14px 0;
+
+    .line-button-group {
+      .button:not(:last-child) {
+        margin-right: 5px;
+      }
+    }
   }
 }
 </style>
