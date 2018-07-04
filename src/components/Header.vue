@@ -36,8 +36,7 @@
 
 <script>
 import { mapState } from "vuex";
-import * as firebase from "firebase";
-import { auth } from "../store/firebase";
+import { auth, googleProvider } from "../store/firebase";
 
 export default {
   data() {
@@ -50,8 +49,7 @@ export default {
   },
   methods: {
     signIn() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider);
+      auth.signInWithPopup(googleProvider);
     },
     signOut() {
       auth.signOut();

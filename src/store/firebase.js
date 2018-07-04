@@ -17,6 +17,8 @@ export const app = firebase.initializeApp({
 export const db = app.database();
 export const auth = app.auth();
 
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+
 export let slotsRef;
 export let sortedSlotsRef;
 
