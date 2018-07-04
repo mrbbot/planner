@@ -16,6 +16,10 @@ String.prototype.replaceAll = function(search, replacement) {
   return target.replace(new RegExp(search, "g"), replacement);
 };
 
+import "./registerServiceWorker";
+
+Vue.config.productionTip = false;
+
 // noinspection JSUnusedGlobalSymbols
 new Vue({
   el: "#app",
